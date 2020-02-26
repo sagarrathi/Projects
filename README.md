@@ -16,7 +16,7 @@
 
   
 
-- **Investigation into The Efficacy of High Frequency Trading Prediction.** 
+- [**Investigation into The Efficacy of High Frequency Trading Prediction.**](https://github.com/sagarrathi/Projects/tree/master/Investigation%20into%20The%20Efficacy%20of%20High%20Frequency%20Trading%20Prediction) 
 
   
 
