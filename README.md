@@ -1,6 +1,6 @@
 # Data Science Projects
 
-- **[Arima modelling on Stock Prices]([https://github.com/sagarrathi/Projects/tree/master/Arima%20modeling%20on%20Stock%20Prices)**
+- [**ARIMA modelling on Stock Prices**](https://github.com/sagarrathi/Projects/tree/master/Arima%20modeling%20on%20Stock%20Prices) 
 
   
 
@@ -16,7 +16,7 @@
 
   
 
-- **Investigation into The Efficacy of High Frequency Trading Prediction.** 
+- [**Investigation into The Efficacy of High Frequency Trading Prediction.**](https://github.com/sagarrathi/Projects/tree/master/Investigation%20into%20The%20Efficacy%20of%20High%20Frequency%20Trading%20Prediction) 
 
   
 
