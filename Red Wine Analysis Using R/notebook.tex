@@ -1,0 +1,848 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Wine}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{n+nf}{library}\PY{p}{(}\PY{n}{ggplot2}\PY{p}{)}
+        \PY{n+nf}{library}\PY{p}{(}\PY{n}{ggcorrplot}\PY{p}{)}
+        \PY{n+nf}{library}\PY{p}{(}\PY{n}{gridExtra}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Loading colour pallete librarry}
+        \PY{n+nf}{library}\PY{p}{(}\PY{n}{RColorBrewer}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Loading 12 colours from Paired pallert into our vector \PYZdq{}my\PYZus{}pallete\PYZdq{}}
+        \PY{n}{my\PYZus{}palette} \PY{o}{=} \PY{n+nf}{c}\PY{p}{(}\PY{n+nf}{brewer.pal}\PY{p}{(}\PY{l+m}{12}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Paired\PYZdq{}}\PY{p}{)}\PY{n+nf}{[c}\PY{p}{(}\PY{l+m}{1}\PY{o}{:}\PY{l+m}{12}\PY{p}{)}\PY{n}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{}Reading Csv file}
+        \PY{n}{df}\PY{o}{=}\PY{n+nf}{read.csv}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{./winequality\PYZhy{}red.csv\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{let-us-first-watch-a-trailer-of-our-datasets}{%
+\section{1. Let us first watch a trailer of our
+datasets}\label{let-us-first-watch-a-trailer-of-our-datasets}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{}Saving only top 5 rows of dataset}
+        \PY{n+nf}{write.csv}\PY{p}{(}\PY{n}{file} \PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{./head.csv\PYZdq{}}\PY{p}{,}\PY{n+nf}{head}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{)}
+        \PY{n+nf}{head}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{tabular}{r|llllllllllll}
+ fixed.acidity & volatile.acidity & citric.acid & residual.sugar & chlorides & free.sulfur.dioxide & total.sulfur.dioxide & density & pH & sulphates & alcohol & quality\\
+\hline
+	  7.4   & 0.70   & 0.00   & 1.9    & 0.076  & 11     & 34     & 0.9978 & 3.51   & 0.56   & 9.4    & 5     \\
+	  7.8   & 0.88   & 0.00   & 2.6    & 0.098  & 25     & 67     & 0.9968 & 3.20   & 0.68   & 9.8    & 5     \\
+	  7.8   & 0.76   & 0.04   & 2.3    & 0.092  & 15     & 54     & 0.9970 & 3.26   & 0.65   & 9.8    & 5     \\
+	 11.2   & 0.28   & 0.56   & 1.9    & 0.075  & 17     & 60     & 0.9980 & 3.16   & 0.58   & 9.8    & 6     \\
+	  7.4   & 0.70   & 0.00   & 1.9    & 0.076  & 11     & 34     & 0.9978 & 3.51   & 0.56   & 9.4    & 5     \\
+	  7.4   & 0.66   & 0.00   & 1.8    & 0.075  & 13     & 40     & 0.9978 & 3.51   & 0.56   & 9.4    & 5     \\
+\end{tabular}
+
+
+    
+    \hypertarget{summary-of-dataset}{%
+\section{2. Summary of dataset}\label{summary-of-dataset}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Summary of data sets}
+        \PY{n}{df\PYZus{}summary}\PY{o}{=}\PY{n+nf}{summary}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Saving summary of data set}
+        \PY{n+nf}{write.csv}\PY{p}{(}\PY{n}{file}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{./df\PYZus{}summary.csv\PYZdq{}}\PY{p}{,} \PY{n+nf}{t}\PY{p}{(}\PY{n}{df\PYZus{}summary}\PY{p}{)} \PY{p}{)}
+        \PY{n}{df\PYZus{}summary}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+ fixed.acidity   volatile.acidity  citric.acid    residual.sugar  
+ Min.   : 4.60   Min.   :0.1200   Min.   :0.000   Min.   : 0.900  
+ 1st Qu.: 7.10   1st Qu.:0.3900   1st Qu.:0.090   1st Qu.: 1.900  
+ Median : 7.90   Median :0.5200   Median :0.260   Median : 2.200  
+ Mean   : 8.32   Mean   :0.5278   Mean   :0.271   Mean   : 2.539  
+ 3rd Qu.: 9.20   3rd Qu.:0.6400   3rd Qu.:0.420   3rd Qu.: 2.600  
+ Max.   :15.90   Max.   :1.5800   Max.   :1.000   Max.   :15.500  
+   chlorides       free.sulfur.dioxide total.sulfur.dioxide    density      
+ Min.   :0.01200   Min.   : 1.00       Min.   :  6.00       Min.   :0.9901  
+ 1st Qu.:0.07000   1st Qu.: 7.00       1st Qu.: 22.00       1st Qu.:0.9956  
+ Median :0.07900   Median :14.00       Median : 38.00       Median :0.9968  
+ Mean   :0.08747   Mean   :15.87       Mean   : 46.47       Mean   :0.9967  
+ 3rd Qu.:0.09000   3rd Qu.:21.00       3rd Qu.: 62.00       3rd Qu.:0.9978  
+ Max.   :0.61100   Max.   :72.00       Max.   :289.00       Max.   :1.0037  
+       pH          sulphates         alcohol         quality     
+ Min.   :2.740   Min.   :0.3300   Min.   : 8.40   Min.   :3.000  
+ 1st Qu.:3.210   1st Qu.:0.5500   1st Qu.: 9.50   1st Qu.:5.000  
+ Median :3.310   Median :0.6200   Median :10.20   Median :6.000  
+ Mean   :3.311   Mean   :0.6581   Mean   :10.42   Mean   :5.636  
+ 3rd Qu.:3.400   3rd Qu.:0.7300   3rd Qu.:11.10   3rd Qu.:6.000  
+ Max.   :4.010   Max.   :2.0000   Max.   :14.90   Max.   :8.000  
+    \end{verbatim}
+
+    
+    \hypertarget{number-of-unique-values}{%
+\subsection{2.1 Number of Unique Values}\label{number-of-unique-values}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} Unique values of quality coloumn of dataframe}
+        \PY{n+nf}{unique}\PY{p}{(}\PY{n}{df}\PY{o}{\PYZdl{}}\PY{n}{quality}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{enumerate*}
+\item 5
+\item 6
+\item 7
+\item 4
+\item 8
+\item 3
+\end{enumerate*}
+
+
+    
+    \hypertarget{frequency-of-qulaity}{%
+\subsection{2.2 Frequency of qulaity}\label{frequency-of-qulaity}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} Frequency of occuarnce of each quality}
+        \PY{n+nf}{table}\PY{p}{(}\PY{n}{df}\PY{o}{\PYZdl{}}\PY{n}{quality}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+
+  3   4   5   6   7   8 
+ 10  53 681 638 199  18 
+    \end{verbatim}
+
+    
+    \hypertarget{number-of-null-values}{%
+\subsection{2.3 Number of NULL values}\label{number-of-null-values}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} Findin number of nulls in data set. }
+        \PY{c+c1}{\PYZsh{}\PYZsh{} is.na provides one true value for each null in dataset}
+        \PY{n+nf}{sum}\PY{p}{(}\PY{n+nf}{is.na}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    0
+
+    
+    \hypertarget{box-plot-of-all-indiviidual-columns}{%
+\subsection{3. Box plot of all indiviidual
+columns}\label{box-plot-of-all-indiviidual-columns}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}  BOX PLOT OF ALL INDIVIDUAL COLUMNS}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        
+        \PY{c+c1}{\PYZsh{} Copying all column names to use in for loop}
+        \PY{n}{df\PYZus{}col}\PY{o}{=}\PY{n+nf}{colnames}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Creating emty list of to store all our chart}
+        \PY{n}{p} \PY{o}{=} \PY{n+nf}{list}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Starting for loop to traverse all 12 columns }
+        \PY{n+nf}{for}\PY{p}{(}\PY{n}{i} \PY{n}{in} \PY{l+m}{1}\PY{o}{:}\PY{l+m}{12}\PY{p}{)}\PY{p}{\PYZob{}}
+            \PY{c+c1}{\PYZsh{}Picking up name of column}
+            \PY{n}{col}\PY{o}{=}\PY{n}{df\PYZus{}col}\PY{n}{[i}\PY{n}{]}
+            \PY{c+c1}{\PYZsh{} Stacking our data frame}
+            \PY{c+c1}{\PYZsh{} All column willl be stacked  over one another }
+            \PY{n}{df\PYZus{}stack}\PY{o}{=}\PY{n+nf}{stack}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} Taking only those rows which contain our current column name}
+            \PY{n}{df\PYZus{}stack\PYZus{}min}\PY{o}{=}\PY{n}{df\PYZus{}stack}\PY{n}{[df\PYZus{}stack}\PY{o}{\PYZdl{}}\PY{n}{ind}\PY{o}{==}\PY{n}{df\PYZus{}col}\PY{n}{[i}\PY{n}{]}\PY{p}{,}\PY{n}{]}
+            
+            \PY{c+c1}{\PYZsh{} Creating ggplot object containing chart}
+            \PY{n}{p\PYZus{}small}\PY{o}{=}\PY{n+nf}{ggplot}\PY{p}{(}\PY{n}{df\PYZus{}stack\PYZus{}min}\PY{p}{,} \PY{n+nf}{aes}\PY{p}{(}\PY{n}{ind}\PY{p}{,} \PY{n}{values}\PY{p}{)}\PY{p}{)}\PY{o}{+}
+            \PY{n+nf}{geom\PYZus{}boxplot}\PY{p}{(}\PY{n}{fill}\PY{o}{=}\PY{n}{my\PYZus{}palette}\PY{n}{[i}\PY{n}{]}\PY{p}{)}\PY{o}{+}
+            \PY{n+nf}{labs}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Values\PYZdq{}}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}Saving chart in list}
+            \PY{n}{p}\PY{n}{[}\PY{n}{[i}\PY{n}{]}\PY{n}{]} \PY{o}{=} \PY{n}{p\PYZus{}small}
+        \PY{p}{\PYZcb{}}
+        
+        \PY{c+c1}{\PYZsh{} Saving chart as png}
+        \PY{n+nf}{png}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{box\PYZus{}plot.png\PYZdq{}}\PY{p}{,} \PY{n}{res}\PY{o}{=}\PY{l+m}{300}\PY{p}{,} \PY{n}{width} \PY{o}{=} \PY{l+m}{6}\PY{p}{,} \PY{n}{height} \PY{o}{=} \PY{l+m}{6}\PY{p}{,} \PY{n}{units} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{in\PYZsq{}}\PY{p}{)}
+        \PY{n+nf}{grid.arrange}\PY{p}{(}\PY{n}{p}\PY{n}{[}\PY{n}{[1}\PY{n}{]}\PY{n}{]}\PY{p}{,}\PY{n}{p}\PY{n}{[}\PY{n}{[2}\PY{n}{]}\PY{n}{]}\PY{p}{,}
+                     \PY{n}{p}\PY{n}{[}\PY{n}{[3}\PY{n}{]}\PY{n}{]}\PY{p}{,}\PY{n}{p}\PY{n}{[}\PY{n}{[4}\PY{n}{]}\PY{n}{]}\PY{p}{,}
+                     \PY{n}{p}\PY{n}{[}\PY{n}{[5}\PY{n}{]}\PY{n}{]}\PY{p}{,}\PY{n}{p}\PY{n}{[}\PY{n}{[6}\PY{n}{]}\PY{n}{]}\PY{p}{,}
+                     \PY{n}{p}\PY{n}{[}\PY{n}{[7}\PY{n}{]}\PY{n}{]}\PY{p}{,}\PY{n}{p}\PY{n}{[}\PY{n}{[8}\PY{n}{]}\PY{n}{]}\PY{p}{,}
+                     \PY{n}{p}\PY{n}{[}\PY{n}{[9}\PY{n}{]}\PY{n}{]}\PY{p}{,}\PY{n}{p}\PY{n}{[}\PY{n}{[10}\PY{n}{]}\PY{n}{]}\PY{p}{,}
+                     \PY{n}{p}\PY{n}{[}\PY{n}{[11}\PY{n}{]}\PY{n}{]}\PY{p}{,}\PY{n}{p}\PY{n}{[}\PY{n}{[12}\PY{n}{]}\PY{n}{]}\PY{p}{,}\PY{n}{ncol} \PY{o}{=} \PY{l+m}{6}\PY{p}{)}
+        \PY{n+nf}{dev.off}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}Displaying chart in arranged grid format}
+        \PY{n+nf}{grid.arrange}\PY{p}{(}\PY{n}{p}\PY{n}{[}\PY{n}{[1}\PY{n}{]}\PY{n}{]}\PY{p}{,}\PY{n}{p}\PY{n}{[}\PY{n}{[2}\PY{n}{]}\PY{n}{]}\PY{p}{,}
+                     \PY{n}{p}\PY{n}{[}\PY{n}{[3}\PY{n}{]}\PY{n}{]}\PY{p}{,}\PY{n}{p}\PY{n}{[}\PY{n}{[4}\PY{n}{]}\PY{n}{]}\PY{p}{,}
+                     \PY{n}{p}\PY{n}{[}\PY{n}{[5}\PY{n}{]}\PY{n}{]}\PY{p}{,}\PY{n}{p}\PY{n}{[}\PY{n}{[6}\PY{n}{]}\PY{n}{]}\PY{p}{,}
+                     \PY{n}{p}\PY{n}{[}\PY{n}{[7}\PY{n}{]}\PY{n}{]}\PY{p}{,}\PY{n}{p}\PY{n}{[}\PY{n}{[8}\PY{n}{]}\PY{n}{]}\PY{p}{,}
+                     \PY{n}{p}\PY{n}{[}\PY{n}{[9}\PY{n}{]}\PY{n}{]}\PY{p}{,}\PY{n}{p}\PY{n}{[}\PY{n}{[10}\PY{n}{]}\PY{n}{]}\PY{p}{,}
+                     \PY{n}{p}\PY{n}{[}\PY{n}{[11}\PY{n}{]}\PY{n}{]}\PY{p}{,}\PY{n}{p}\PY{n}{[}\PY{n}{[12}\PY{n}{]}\PY{n}{]}\PY{p}{,}\PY{n}{ncol} \PY{o}{=} \PY{l+m}{6}\PY{p}{)}
+\end{Verbatim}
+
+
+    \textbf{png:} 2
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{correlation-matrix}{%
+\section{4. Correlation Matrix}\label{correlation-matrix}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{} CORRRELATION MATRIX PLOT}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        
+        \PY{c+c1}{\PYZsh{} Finding correlation matrx of our dataframe}
+        \PY{n}{df\PYZus{}mat}\PY{o}{=}\PY{n+nf}{cor}\PY{p}{(}\PY{n+nf}{as.matrix}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Rounding off the correlating matrix to only one decimal place, so that it is visible in chart.}
+        \PY{n}{df\PYZus{}mat}\PY{o}{=}\PY{n+nf}{round}\PY{p}{(}\PY{n}{df\PYZus{}mat}\PY{p}{,}\PY{l+m}{1}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Creating ggplot object for correlation matrix}
+        \PY{n}{p\PYZus{}corr}\PY{o}{=}\PY{n+nf}{ggcorrplot}\PY{p}{(}\PY{n}{df\PYZus{}mat}\PY{p}{,} \PY{n}{lab} \PY{o}{=} \PY{n+nb+bp}{T}\PY{p}{,} \PY{n}{type}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{lower\PYZdq{}}\PY{p}{,} \PY{n}{insig} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{blank\PYZdq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Saving ggplot object in png file}
+        \PY{n+nf}{png}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{correlation\PYZus{}matrix.png\PYZdq{}}\PY{p}{,} \PY{n}{res}\PY{o}{=}\PY{l+m}{300}\PY{p}{,} \PY{n}{width} \PY{o}{=} \PY{l+m}{6}\PY{p}{,} \PY{n}{height} \PY{o}{=} \PY{l+m}{6}\PY{p}{,} \PY{n}{units} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{in\PYZsq{}}\PY{p}{)}
+        \PY{n+nf}{print}\PY{p}{(}\PY{n}{p\PYZus{}corr}\PY{p}{)}
+        \PY{n+nf}{dev.off}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Displaying ggplot grpah}
+        \PY{n}{p\PYZus{}corr}
+\end{Verbatim}
+
+
+    \textbf{png:} 2
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{multivarient-box-plot}{%
+\section{5. Multivarient Box Plot}\label{multivarient-box-plot}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{} MULTI VARIENT BOX PLOT OF ALL COLUMNS}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+         
+         \PY{c+c1}{\PYZsh{} Creating a copy of df with new name dfe}
+         \PY{n}{dfe}\PY{o}{=}\PY{n}{df}
+         \PY{c+c1}{\PYZsh{} Converting qualtiy column of dfe to factor variale for muti\PYZhy{}varient plot}
+         \PY{n}{dfe}\PY{o}{\PYZdl{}}\PY{n}{quality}\PY{o}{=}\PY{n+nf}{as.factor}\PY{p}{(}\PY{n}{dfe}\PY{o}{\PYZdl{}}\PY{n}{quality}\PY{p}{)}
+         
+         \PY{n}{df\PYZus{}col}\PY{o}{=}\PY{n+nf}{colnames}\PY{p}{(}\PY{n}{dfe}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Creating empty list of to store all our chart}
+         \PY{n}{p} \PY{o}{=} \PY{n+nf}{list}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Starting for loop to traverse all 11 columns }
+         \PY{n+nf}{for}\PY{p}{(}\PY{n}{i} \PY{n}{in} \PY{l+m}{1}\PY{o}{:}\PY{l+m}{11} \PY{p}{)}\PY{p}{\PYZob{}}
+             \PY{c+c1}{\PYZsh{}Picking up name of column}
+             \PY{n}{col}\PY{o}{=}\PY{n}{df\PYZus{}col}\PY{n}{[i}\PY{n}{]}
+             \PY{c+c1}{\PYZsh{} Creating ggplot object containing chart}
+             \PY{n}{p\PYZus{}small}\PY{o}{=}\PY{n+nf}{ggplot}\PY{p}{(}\PY{n}{dfe}\PY{p}{,}  \PY{n}{mapping}\PY{o}{=}\PY{n+nf}{aes\PYZus{}string}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{quality\PYZdq{}}\PY{p}{,}\PY{n}{y} \PY{o}{=}\PY{n}{col}\PY{p}{)}  \PY{p}{)}\PY{o}{+}
+                     \PY{n+nf}{geom\PYZus{}boxplot}\PY{p}{(}\PY{n}{fill}\PY{o}{=}\PY{n}{my\PYZus{}palette}\PY{n}{[i}\PY{n}{]}\PY{p}{)}\PY{o}{+}
+              \PY{n+nf}{theme}\PY{p}{(}\PY{n}{aspect.ratio} \PY{o}{=} \PY{l+m}{1}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}Saving chart in list}
+             \PY{n}{p}\PY{n}{[}\PY{n}{[i}\PY{n}{]}\PY{n}{]} \PY{o}{=} \PY{n}{p\PYZus{}small}
+         \PY{p}{\PYZcb{}}
+         
+         
+         \PY{c+c1}{\PYZsh{} Displaying all the chart}
+         \PY{n+nf}{for }\PY{p}{(}\PY{n}{i} \PY{n}{in} \PY{l+m}{1}\PY{o}{:}\PY{l+m}{11}\PY{p}{)}\PY{p}{\PYZob{}}
+         \PY{n+nf}{print}\PY{p}{(}\PY{n}{p}\PY{n}{[}\PY{n}{[i}\PY{n}{]}\PY{n}{]}\PY{p}{)}
+         \PY{p}{\PYZcb{}}
+         
+         \PY{c+c1}{\PYZsh{} Saving all the chart}
+         \PY{n+nf}{for }\PY{p}{(}\PY{n}{i} \PY{n}{in} \PY{l+m}{1}\PY{o}{:}\PY{l+m}{11}\PY{p}{)}\PY{p}{\PYZob{}}
+         \PY{n}{file\PYZus{}name}\PY{o}{=} \PY{n+nf}{paste}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{./multi\PYZus{}varient\PYZus{}box/\PYZdq{}}\PY{p}{,} \PY{n}{df\PYZus{}col}\PY{n}{[i}\PY{n}{]}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{.png\PYZdq{}}\PY{p}{,} \PY{n}{sep} \PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZdq{}} \PY{p}{)}  
+         \PY{n+nf}{png}\PY{p}{(}\PY{n}{file}\PY{o}{=}\PY{n}{file\PYZus{}name}\PY{p}{)}    
+         \PY{n+nf}{print}\PY{p}{(}\PY{n}{p}\PY{n}{[}\PY{n}{[i}\PY{n}{]}\PY{n}{]}\PY{p}{)}
+         \PY{n+nf}{dev.off}\PY{p}{(}\PY{p}{)}
+         \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_8.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_9.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_10.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{kernel-density-graph-for-normality-of-each-variables}{%
+\section{6. Kernel Density graph for normality of each
+variables}\label{kernel-density-graph-for-normality-of-each-variables}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{} KERNEL DENSITY GRAPH  }
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+         
+         \PY{n}{df\PYZus{}col}\PY{o}{=}\PY{n+nf}{colnames}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+         \PY{n}{df\PYZus{}row}\PY{o}{=}\PY{n+nf}{rownames}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+         
+         \PY{n}{p} \PY{o}{=} \PY{n+nf}{list}\PY{p}{(}\PY{p}{)}
+         
+         
+         \PY{n+nf}{for}\PY{p}{(}\PY{n}{i} \PY{n}{in} \PY{l+m}{1}\PY{o}{:}\PY{l+m}{12}\PY{p}{)}\PY{p}{\PYZob{}}
+             \PY{c+c1}{\PYZsh{}Get column from the column list}
+             \PY{n}{col}\PY{o}{=}\PY{n}{df\PYZus{}col}\PY{n}{[i}\PY{n}{]}
+             
+             \PY{c+c1}{\PYZsh{}Stack all column oven one another}
+             \PY{n}{df\PYZus{}stack}\PY{o}{=}\PY{n+nf}{stack}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}Take out one column of stack}
+             \PY{n}{df\PYZus{}stack\PYZus{}min}\PY{o}{=}\PY{n}{df\PYZus{}stack}\PY{n}{[df\PYZus{}stack}\PY{o}{\PYZdl{}}\PY{n}{ind}\PY{o}{==}\PY{n}{df\PYZus{}col}\PY{n}{[i}\PY{n}{]}\PY{p}{,}\PY{n}{]}
+             
+             \PY{c+c1}{\PYZsh{}Make a graph object}
+             \PY{n}{p\PYZus{}small}\PY{o}{=}\PY{n+nf}{ggplot}\PY{p}{(}\PY{n}{df\PYZus{}stack\PYZus{}min}\PY{p}{,} \PY{n+nf}{aes}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{values}\PY{p}{)}\PY{p}{)}\PY{o}{+} \PY{c+c1}{\PYZsh{}\PYZsh{} Standard function }
+                     \PY{n+nf}{geom\PYZus{}density}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{n}{my\PYZus{}palette}\PY{n}{[i}\PY{n}{]}\PY{p}{,} \PY{n}{fill}\PY{o}{=}\PY{n}{my\PYZus{}palette}\PY{n}{[i}\PY{n}{]}\PY{p}{)}\PY{o}{+} \PY{c+c1}{\PYZsh{}\PYZsh{} density graph}
+                     \PY{n+nf}{labs}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{col}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{F Density\PYZdq{}}\PY{p}{)}
+         
+               
+             \PY{n}{p}\PY{n}{[}\PY{n}{[i}\PY{n}{]}\PY{n}{]} \PY{o}{=} \PY{n}{p\PYZus{}small} \PY{c+c1}{\PYZsh{}\PYZsh{}Save the chart object in list}
+             
+             
+         \PY{p}{\PYZcb{}}
+         
+         \PY{c+c1}{\PYZsh{}Savinf the chart}
+         \PY{n+nf}{png}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{kernel\PYZus{}density\PYZus{}estimate.png\PYZdq{}}\PY{p}{,} \PY{n}{res}\PY{o}{=}\PY{l+m}{300}\PY{p}{,} \PY{n}{width} \PY{o}{=} \PY{l+m}{6}\PY{p}{,} \PY{n}{height} \PY{o}{=} \PY{l+m}{6}\PY{p}{,} \PY{n}{units} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{in\PYZsq{}}\PY{p}{)}
+         \PY{n+nf}{grid.arrange}\PY{p}{(}\PY{n}{p}\PY{n}{[}\PY{n}{[1}\PY{n}{]}\PY{n}{]}\PY{p}{,}\PY{n}{p}\PY{n}{[}\PY{n}{[2}\PY{n}{]}\PY{n}{]}\PY{p}{,}
+                      \PY{n}{p}\PY{n}{[}\PY{n}{[3}\PY{n}{]}\PY{n}{]}\PY{p}{,}\PY{n}{p}\PY{n}{[}\PY{n}{[4}\PY{n}{]}\PY{n}{]}\PY{p}{,}
+                      \PY{n}{p}\PY{n}{[}\PY{n}{[5}\PY{n}{]}\PY{n}{]}\PY{p}{,}\PY{n}{p}\PY{n}{[}\PY{n}{[6}\PY{n}{]}\PY{n}{]}\PY{p}{,}
+                      \PY{n}{p}\PY{n}{[}\PY{n}{[7}\PY{n}{]}\PY{n}{]}\PY{p}{,}\PY{n}{p}\PY{n}{[}\PY{n}{[8}\PY{n}{]}\PY{n}{]}\PY{p}{,}
+                      \PY{n}{p}\PY{n}{[}\PY{n}{[9}\PY{n}{]}\PY{n}{]}\PY{p}{,}\PY{n}{p}\PY{n}{[}\PY{n}{[10}\PY{n}{]}\PY{n}{]}\PY{p}{,}
+                      \PY{n}{p}\PY{n}{[}\PY{n}{[11}\PY{n}{]}\PY{n}{]}\PY{p}{,}\PY{n}{p}\PY{n}{[}\PY{n}{[12}\PY{n}{]}\PY{n}{]}\PY{p}{,}\PY{n}{ncol} \PY{o}{=} \PY{l+m}{3}\PY{p}{)}
+         
+         \PY{n+nf}{dev.off}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} PLotting the chart }
+         \PY{n+nf}{grid.arrange}\PY{p}{(}\PY{n}{p}\PY{n}{[}\PY{n}{[1}\PY{n}{]}\PY{n}{]}\PY{p}{,}\PY{n}{p}\PY{n}{[}\PY{n}{[2}\PY{n}{]}\PY{n}{]}\PY{p}{,}
+                      \PY{n}{p}\PY{n}{[}\PY{n}{[3}\PY{n}{]}\PY{n}{]}\PY{p}{,}\PY{n}{p}\PY{n}{[}\PY{n}{[4}\PY{n}{]}\PY{n}{]}\PY{p}{,}
+                      \PY{n}{p}\PY{n}{[}\PY{n}{[5}\PY{n}{]}\PY{n}{]}\PY{p}{,}\PY{n}{p}\PY{n}{[}\PY{n}{[6}\PY{n}{]}\PY{n}{]}\PY{p}{,}
+                      \PY{n}{p}\PY{n}{[}\PY{n}{[7}\PY{n}{]}\PY{n}{]}\PY{p}{,}\PY{n}{p}\PY{n}{[}\PY{n}{[8}\PY{n}{]}\PY{n}{]}\PY{p}{,}
+                      \PY{n}{p}\PY{n}{[}\PY{n}{[9}\PY{n}{]}\PY{n}{]}\PY{p}{,}\PY{n}{p}\PY{n}{[}\PY{n}{[10}\PY{n}{]}\PY{n}{]}\PY{p}{,}
+                      \PY{n}{p}\PY{n}{[}\PY{n}{[11}\PY{n}{]}\PY{n}{]}\PY{p}{,}\PY{n}{p}\PY{n}{[}\PY{n}{[12}\PY{n}{]}\PY{n}{]}\PY{p}{,}\PY{n}{ncol} \PY{o}{=} \PY{l+m}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \textbf{png:} 2
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{pair-plots-of-all-the-columns}{%
+\section{7. Pair Plots of all the
+columns}\label{pair-plots-of-all-the-columns}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{} PAIRS PLOT  }
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+         
+         \PY{c+c1}{\PYZsh{} We need pairs3d library to get our chart, which depend upon shiny library }
+         \PY{n+nf}{library}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{shiny\PYZdq{}}\PY{p}{)}
+         \PY{n+nf}{library}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{pairsD3\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}We use this command once to obtain the code to draw chart and then do not use this.}
+         \PY{c+c1}{\PYZsh{} shinypairs(df)}
+         
+         \PY{c+c1}{\PYZsh{}The followin fcode is copied from above commented code and pasted here to obtain chart}
+         \PY{n}{x}\PY{o}{=}\PY{n+nf}{pairsD3}\PY{p}{(}\PY{n}{df}\PY{n}{[}\PY{p}{,}\PY{n+nf}{c}\PY{p}{(}\PY{l+m}{1}\PY{o}{:}\PY{l+m}{11}\PY{p}{)}\PY{n}{]}\PY{p}{,} \PY{n}{opacity} \PY{o}{=} \PY{l+m}{0.9}\PY{p}{,} \PY{n}{cex} \PY{o}{=} \PY{l+m}{1}\PY{p}{,} \PY{n}{width} \PY{o}{=} \PY{l+m}{1200}\PY{p}{,} \PY{n}{big}\PY{o}{=}\PY{n+nb+bp}{T}\PY{p}{)}
+         \PY{n+nf}{savePairs}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{file} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{pairs\PYZus{}plot.html\PYZdq{}}\PY{p}{,}\PY{n}{selfcontained} \PY{o}{=} \PY{n+nb+bp}{T}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}Displatying the chart }
+         \PY{n}{x}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HTML widgets cannot be represented in plain text (need html)
+    \end{verbatim}
+
+    
+    \hypertarget{pricipal-componenet-analysis}{%
+\section{8. Pricipal Componenet
+analysis}\label{pricipal-componenet-analysis}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{} PRICIPAL COMPONENT ANALYSIS TABLE }
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+         
+         \PY{c+c1}{\PYZsh{}Using prcomp to get pricipal component analysis of wine.}
+         \PY{c+c1}{\PYZsh{} This summary is saved as part of df dataframe and can be acessed via df.pca}
+         \PY{n}{df.pca}\PY{o}{=}\PY{n+nf}{prcomp}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{center} \PY{o}{=} \PY{n+nb+bp}{T}\PY{p}{,} \PY{n}{scale}\PY{o}{=}\PY{n+nb+bp}{T} \PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Saving df.pca data in csv file, we use transpose here }
+         \PY{n}{x}\PY{o}{=}\PY{n+nf}{summary}\PY{p}{(}\PY{n}{df.pca}\PY{p}{)}\PY{o}{\PYZdl{}}\PY{n}{importance}
+         \PY{n+nf}{write.csv}\PY{p}{(}\PY{n}{file}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{pca.csv\PYZdq{}}\PY{p}{,} \PY{n+nf}{t}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Priting out prcomp data stored in df.pca}
+         \PY{n}{x}
+\end{Verbatim}
+
+
+    \begin{tabular}{r|llllllllllll}
+  & PC1 & PC2 & PC3 & PC4 & PC5 & PC6 & PC7 & PC8 & PC9 & PC10 & PC11 & PC12\\
+\hline
+	Standard deviation & 1.766683  & 1.497292  & 1.297274  & 1.10228   & 0.9865412 & 0.8139977 & 0.7863319 & 0.7112472 & 0.6413326 & 0.5726425 & 0.4245216 & 0.2439629\\
+	Proportion of Variance & 0.260100  & 0.186820  & 0.140240  & 0.10125   & 0.0811100 & 0.0552200 & 0.0515300 & 0.0421600 & 0.0342800 & 0.0273300 & 0.0150200 & 0.0049600\\
+	Cumulative Proportion & 0.260100  & 0.446920  & 0.587160  & 0.68842   & 0.7695200 & 0.8247400 & 0.8762600 & 0.9184200 & 0.9527000 & 0.9800200 & 0.9950400 & 1.0000000\\
+\end{tabular}
+
+
+    
+    \hypertarget{plotting-pca}{%
+\section{8.1 Plotting PCA}\label{plotting-pca}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{} PRICIPAL COMPONENT ANALYSIS PLOT }
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+         
+         \PY{c+c1}{\PYZsh{} Library to plot our prcomp data }
+         \PY{n+nf}{library}\PY{p}{(}\PY{n}{ggfortify}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Sending df.pca object to autoplot for the graph}
+         \PY{n+nf}{autoplot}\PY{p}{(}\PY{n}{df.pca}\PY{p}{,}\PY{n}{colour}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{quality\PYZdq{}}\PY{p}{,}\PY{n}{loadings}\PY{o}{=}\PY{n+nb+bp}{T}\PY{p}{,} \PY{n}{loadings.label}\PY{o}{=}\PY{n+nb+bp}{T}\PY{p}{,} \PY{n}{loadings.label.repel}\PY{o}{=}\PY{n+nb+bp}{T}\PY{p}{,} \PY{n}{loadings.label.size} \PY{o}{=} \PY{l+m}{3}\PY{p}{,}\PY{n}{loadings.label.colour} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{brown\PYZdq{}}\PY{p}{,} \PY{n}{loadings.colour} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{brown\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{simple-regression}{%
+\section{9. Simple regression}\label{simple-regression}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{} PERFORMING SIMPLE REGRESSION}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+         
+         \PY{c+c1}{\PYZsh{} Using simple ols regression}
+         \PY{n}{ols\PYZus{}df}\PY{o}{=}\PY{n+nf}{lm}\PY{p}{(}\PY{n}{quality} \PY{o}{\PYZti{}} \PY{n}{.,} \PY{n}{data}\PY{o}{=}\PY{n}{df}\PY{p}{)}
+         \PY{n}{df\PYZus{}summary}\PY{o}{=}\PY{n+nf}{summary}\PY{p}{(}\PY{n}{ols\PYZus{}df}\PY{p}{)}
+         \PY{n}{df\PYZus{}summary}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+
+Call:
+lm(formula = quality ~ ., data = df)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.68911 -0.36652 -0.04699  0.45202  2.02498 
+
+Coefficients:
+                       Estimate Std. Error t value Pr(>|t|)    
+(Intercept)           2.197e+01  2.119e+01   1.036   0.3002    
+fixed.acidity         2.499e-02  2.595e-02   0.963   0.3357    
+volatile.acidity     -1.084e+00  1.211e-01  -8.948  < 2e-16 ***
+citric.acid          -1.826e-01  1.472e-01  -1.240   0.2150    
+residual.sugar        1.633e-02  1.500e-02   1.089   0.2765    
+chlorides            -1.874e+00  4.193e-01  -4.470 8.37e-06 ***
+free.sulfur.dioxide   4.361e-03  2.171e-03   2.009   0.0447 *  
+total.sulfur.dioxide -3.265e-03  7.287e-04  -4.480 8.00e-06 ***
+density              -1.788e+01  2.163e+01  -0.827   0.4086    
+pH                   -4.137e-01  1.916e-01  -2.159   0.0310 *  
+sulphates             9.163e-01  1.143e-01   8.014 2.13e-15 ***
+alcohol               2.762e-01  2.648e-02  10.429  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.648 on 1587 degrees of freedom
+Multiple R-squared:  0.3606,	Adjusted R-squared:  0.3561 
+F-statistic: 81.35 on 11 and 1587 DF,  p-value: < 2.2e-16
+
+    \end{verbatim}
+
+    
+    \hypertarget{summary-of-simple-regression}{%
+\subsection{9.1 Summary of Simple
+Regression}\label{summary-of-simple-regression}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{} REGRESSION COEFFICIENT TABLE}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+         
+         \PY{c+c1}{\PYZsh{} Displaying regression data in tabular format }
+         \PY{c+c1}{\PYZsh{} containing only coefficints}
+         \PY{n}{df\PYZus{}summary}\PY{o}{\PYZdl{}}\PY{n}{coefficients}
+         
+         \PY{c+c1}{\PYZsh{}Saving regression summary }
+         \PY{n+nf}{write.csv}\PY{p}{(}\PY{n}{file}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{regression.csv\PYZdq{}}\PY{p}{,} \PY{n}{df\PYZus{}summary}\PY{o}{\PYZdl{}}\PY{n}{coefficients}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{tabular}{r|llll}
+  & Estimate & Std. Error & t value & Pr(>\textbar{}t\textbar{})\\
+\hline
+	(Intercept) &  21.965208449 & 2.119457e+01  &  1.0363599    & 3.001921e-01 \\
+	fixed.acidity &   0.024990553 & 2.594850e-02  &  0.9630827    & 3.356528e-01 \\
+	volatile.acidity &  -1.083590259 & 1.211013e-01  & -8.9478019    & 9.872361e-19 \\
+	citric.acid &  -0.182563948 & 1.471762e-01  & -1.2404449    & 2.149942e-01 \\
+	residual.sugar &   0.016331270 & 1.500210e-02  &  1.0885992    & 2.764960e-01 \\
+	chlorides &  -1.874225158 & 4.192832e-01  & -4.4700697    & 8.373953e-06 \\
+	free.sulfur.dioxide &   0.004361333 & 2.171292e-03  &  2.0086353    & 4.474495e-02 \\
+	total.sulfur.dioxide &  -0.003264580 & 7.287285e-04  & -4.4798298    & 8.004610e-06 \\
+	density & -17.881163832 & 2.163310e+01  & -0.8265650    & 4.086079e-01 \\
+	pH &  -0.413653144 & 1.915974e-01  & -2.1589710    & 3.100189e-02 \\
+	sulphates &   0.916334413 & 1.143375e-01  &  8.0142971    & 2.127228e-15 \\
+	alcohol &   0.276197699 & 2.648359e-02  & 10.4290143    & 1.123029e-24 \\
+\end{tabular}
+
+
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

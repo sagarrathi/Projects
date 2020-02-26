@@ -1,0 +1,20 @@
+*.ppt 
+*.pptx 
+*.doc 
+*.docx 
+*.xls 
+*.xlsx 
+*.odt 
+*.odf 
+*.odp 
+*.csv 
+
+
+*.zip 
+*.h5 
+*.avi 
+*.mp4 
+
+git config http.postBuffer 1048576000
+
+test
