@@ -8,7 +8,7 @@
 
   - Under The Guidance of professor: [Sarveshwar Kumar Inani](https://www.linkedin.com/in/sarveshwar-kumar-inani-635a9332/)
 
-    
+<br/>
 
 -   [Collecting data for IPL(Indian Premier Leauge) Dashboard](https://github.com/sagarrathi/Projects/tree/master/Collecting%20data%20for%20IPL%20Dashboard%20)
     
@@ -26,7 +26,7 @@
     
     -   A simple Recommender system for inter-city migration. Based on data from foursquare API.
         
-- Live Project: [https://sagarrathi.github.io/](https://sagarrathi.github.io/)
+    - Live Project: [https://sagarrathi.github.io/](https://sagarrathi.github.io/)
     
       
     
