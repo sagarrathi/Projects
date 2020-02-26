@@ -1,6 +1,6 @@
 # Data Science Projects
 
-- **[Arima modelling on Stock Prices]([https://github.com/sagarrathi/Projects/tree/master/Arima%20modeling%20on%20Stock%20Prices](https://github.com/sagarrathi/Projects/tree/master/Arima modeling on Stock Prices))**
+- **[Arima modelling on Stock Prices]([https://github.com/sagarrathi/Projects/tree/master/Arima%20modeling%20on%20Stock%20Prices])**
 
   
 
