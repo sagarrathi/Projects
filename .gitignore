@@ -9,6 +9,9 @@ import.py
 *.index
 *.h5
 *.h5y
+*.csv
+*.xlsx
+*.xls
 
 #git rm -r --cached . 
 #git add .
