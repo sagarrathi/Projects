@@ -7,7 +7,7 @@
 2. [Collecting data for IPL(Indian Premier Leauge) Dashboard](https://github.com/sagarrathi/Projects/tree/master/Collecting%20data%20for%20IPL%20Dashboard%20)
     - Want to bid for IPL players? This project will help you.
     - Use this project to download images of every cricketer available in \"espncricinfo.com\".
-    - For our project images of around 700 Cricketers were obtained 10 minutes.
+    - For our project images of around 700 Cricketers were obtained 5 minutes.
     - Tableau Link: [https://public.tableau.com/profile/rathi108\#!/vizhome/IPLDashBoard/IPLStory](https://public.tableau.com/profile/rathi108#!/vizhome/IPLDashBoard/IPLStory)
 
 3. [Finding Similar Cities to Migrate](https://github.com/sagarrathi/Projects/tree/master/Finding%20Similar%20Cities%20to%20Migrate)
